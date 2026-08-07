@@ -8,8 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <style>
-  
 :root{
   --cream:#FFFCF5;
   --cream-deep:#FBF2DC;
@@ -78,6 +78,18 @@ nav.main-links a:hover{color:var(--ink);background:var(--gold-pale);}
 .header-phone svg{color:var(--gold-deep);}
 .menu-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px;}
 .menu-toggle span{width:26px;height:2px;background:var(--ink);border-radius:2px;transition:all .3s;}
+.menu-toggle.active span:nth-child(1){
+    transform:translateY(7px) rotate(45deg);
+}
+
+.menu-toggle.active span:nth-child(2){
+    opacity:0;
+}
+
+.menu-toggle.active span:nth-child(3){
+    transform:translateY(-7px) rotate(-45deg);
+}
+
 
 /* ===== Hero ===== */
 .hero{position:relative;padding:172px 0 100px;overflow:hidden;}
@@ -147,11 +159,36 @@ section{padding:100px 0;position:relative;}
 .svc-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold-light),var(--gold-deep));transform:scaleX(0);transform-origin:left;transition:transform .4s ease;}
 .svc-card:hover{transform:translateY(-8px);box-shadow:0 18px 42px rgba(184,121,30,0.2);border-color:rgba(232,169,59,0.5);}
 .svc-card:hover::before{transform:scaleX(1);}
-.svc-icon{width:60px;height:60px;border-radius:16px;background:linear-gradient(135deg,var(--gold-pale),var(--gold-light));display:flex;align-items:center;justify-content:center;margin-bottom:22px;color:var(--gold-darkest);}
-.svc-icon svg{width:30px;height:30px;}
-.svc-card h3{font-size:19px;margin-bottom:10px;}
+.svc-icon{width:45px;height:45px;border-radius:16px;background:linear-gradient(135deg,var(--gold-pale),var(--gold-light));display:flex;align-items:center;justify-content:center;margin-bottom:22px;color:var(--gold-darkest);}
+.svc-icon svg{width:25px;height:25px;}
+.svc-card h3{font-size:16px;margin-bottom:10px;}
 .svc-card p{font-size:14.5px;color:var(--ink-soft);font-weight:400;}
 .svc-num{position:absolute;top:24px;right:26px;font-size:13px;color:var(--gold-pale);font-weight:800;}
+
+.svc-link{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-top:18px;
+    color:#c28a1f;
+    font-size:14px;
+    font-weight:600;
+    text-decoration:none;
+    transition:all .3s ease;
+}
+
+.svc-link span{
+    transition:transform .3s ease;
+}
+
+.svc-link:hover{
+    color:#111;
+}
+
+.svc-link:hover span{
+    transform:translateX(5px);
+}
+
 
 /* ===== Process ===== */
 .process{background:var(--white);}
@@ -185,7 +222,7 @@ section{padding:100px 0;position:relative;}
 
 /* ===== Contact ===== */
 .contact{background:var(--white);}
-.contact-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:60px;}
+.contact-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:50px;}
 .contact-info h2{margin-bottom:16px;}
 .contact-info p.lead{margin-bottom:34px;}
 .info-row{display:flex;gap:16px;align-items:flex-start;margin-bottom:26px;}
@@ -218,7 +255,7 @@ footer ul li a:hover{color:var(--gold-light);}
 .foot-social{display:flex;gap:10px;margin-top:6px;}
 .foot-social a{width:38px;height:38px;border-radius:50%;border:1px solid rgba(232,169,59,0.45);display:flex;align-items:center;justify-content:center;color:var(--gold-light);transition:all .3s;}
 .foot-social a:hover{background:var(--gold);color:var(--black);}
-.foot-bottom{display:flex;justify-content:space-between;align-items:center;padding:26px 0;font-size:13px;color:#B39C6E;flex-wrap:wrap;gap:10px;}
+.foot-bottom{display:flex;align-items:center;padding:26px 0;font-size:13px;color:#B39C6E;flex-wrap:wrap;gap:10px;}
 .foot-bottom a{color:#B39C6E;}
 
 .scroll-top{position:fixed;bottom:28px;right:28px;z-index:900;width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--gold-light),var(--gold-deep));color:var(--black);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px rgba(184,121,30,0.4);opacity:0;pointer-events:none;transform:translateY(12px);transition:all .35s ease;cursor:pointer;border:none;}
@@ -247,68 +284,6 @@ footer ul li a:hover{color:var(--gold-light);}
 @media(max-width:900px){
   .header-phone{display:none;}
 }
-@media(max-width:768px){
-  nav.main-links{position:fixed;top:78px;left:0;right:0;bottom:0;
-  background:var(--white);flex-direction:column;padding:36px 28px;gap:6px;
-  transform:translateX(100%);transition:transform .4s ease;overflow-y:auto;align-items:stretch;}
-  
-  nav.main-links.open{transform:translateX(0);}
-  nav.main-links a{width:100%;padding:16px 14px;font-size:16px;border-bottom:1px solid rgba(28,26,22,0.08);border-radius:0;}
-  .menu-toggle{display:flex;}
-  .header-cta .btn-primary{padding:11px 18px;font-size:13px;}
-  .hero{padding:130px 0 70px;}
-  .hero-stats{flex-wrap:wrap;gap:24px;}
-  .svc-grid{grid-template-columns:1fr;}
-  .process-track{grid-template-columns:1fr;}
-  .testi-grid{grid-template-columns:1fr;}
-  .foot-grid{grid-template-columns:1fr 1fr;}
-  .form-row{grid-template-columns:1fr;}
-  .about-points{grid-template-columns:1fr;}
-  .cta-inner{flex-direction:column;text-align:center;justify-content:center;}
-  section{padding:70px 0;}
-  
-  @media (max-width:768px){
-
-nav.main-links{
-
-    position:fixed !important;
-    top:68px !important;
-    left:0 !important;
-    width:100% !important;
-    height:calc(100vh - 68px) !important;
-
-    background:#fff !important;
-
-    display:flex !important;
-    flex-direction:column !important;
-    justify-content:flex-start !important;
-    align-items:flex-start !important;
-
-    padding:20px !important;
-
-    transform:translateX(100%) !important;
-    transition:.4s ease !important;
-
-    z-index:999999 !important;
-}
-
-nav.main-links.open{
-    transform:translateX(0) !important;
-}
-
-nav.main-links a{
-
-    display:block !important;
-    width:100% !important;
-
-    padding:16px 0 !important;
-
-    border-bottom:1px solid #eee !important;
-
-    font-size:18px !important;
-}
-
-}
 
 
 @media(max-width:480px){
@@ -316,6 +291,86 @@ nav.main-links a{
   .brand-text{font-size:14px;}
   .hero-badge{left:8px;bottom:-20px;padding:12px 14px;}
 }
+
+
+/* =========================================================
+   whatsapp icon
+   ========================================================= */
+   .whatsapp-float i{
+    color:#fff;
+    font-size:30px;
+}
+.whatsapp-float{
+    position:fixed;
+    right:22px;
+    bottom:85px;
+
+    width:58px;
+    height:58px;
+
+    background:#25D366;
+    border:3px solid #fff;
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.18),
+        0 0 0 4px rgba(37,211,102,.18);
+
+    z-index:9999;
+
+    transition:all .35s ease;
+
+    animation:whatsappPulse 2s infinite;
+}
+
+.whatsapp-float svg{
+    width:28px;
+    height:28px;
+    fill:#fff;
+}
+
+.whatsapp-float:hover{
+    transform:translateY(-4px) scale(1.08);
+}
+
+@keyframes whatsappPulse{
+    0%{
+        box-shadow:
+        0 10px 25px rgba(0,0,0,.18),
+        0 0 0 0 rgba(37,211,102,.45);
+    }
+
+    70%{
+        box-shadow:
+        0 10px 25px rgba(0,0,0,.18),
+        0 0 0 16px rgba(37,211,102,0);
+    }
+
+    100%{
+        box-shadow:
+        0 10px 25px rgba(0,0,0,.18),
+        0 0 0 0 rgba(37,211,102,0);
+    }
+}
+
+@media(max-width:768px){
+
+.whatsapp-float{
+    right:16px;
+    bottom:80px;
+    width:45px;
+    height:45px;
+}
+.whatsapp-float i 
+{
+font-size:22px;
+}
+
+
 /* =========================================================
    MOBILE RESPONSIVE FIX
    ========================================================= */
@@ -443,28 +498,132 @@ footer .desc,
     gap: 6px;
   }
 
-  .header-cta .btn-primary {
-    padding: 9px 12px;
-    font-size: 11px;
-  }
+  .header-cta .btn-primary{
+    display:none;
+}
 
   .menu-toggle {
-    flex: 0 0 auto;
-    padding: 6px 4px;
-  }
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    flex:0 0 auto;
+    padding:6px 4px;
+    background:transparent;
+    border:0;
+    cursor:pointer;
+}
 
 
-  /* Mobile navigation */
-  nav.main-links {
-    top: 68px;
-    width: 100%;
-    max-width: 100%;
-    left: 0;
-    right: 0;
-    padding: 24px 20px;
-  }
+ nav.main-links{
+    position:fixed;
+    top:56px;
+    left:0;
+    width:100%;
+    height:calc(100vh - 68px);
+    background:#fff;
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    padding:0 24px;
+    overflow-y:auto;
+    z-index:9999;
+    visibility:hidden;
+    opacity:0;
+    pointer-events:none;
+    transform:translateX(100%);
+    transition:transform .35s ease,opacity .35s ease;
+}
 
+nav.main-links.open{
+    visibility:visible;
+    opacity:1;
+    pointer-events:auto;
+    transform:translateX(0);
+}
 
+nav.main-links a{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    width:100%;
+    padding:22px 0;
+    border-bottom:1px solid #ececec;
+    font-size:18px;
+    font-weight:500;
+}
+
+nav.main-links a::after{
+    content:"›";
+    color:var(--gold);
+    font-size:22px;
+}
+
+nav.main-links.open{
+    transform:translateX(0);
+}
+
+nav.main-links a{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    width:100%;
+    padding:22px 0;
+    border-bottom:1px solid #ececec;
+    font-size:18px;
+    font-weight:500;
+}
+
+nav.main-links a::after{
+    content:"›";
+    color:var(--gold);
+    font-size:22px;
+}
+/* Force clean mobile navigation */
+
+nav.main-links a,
+nav.main-links a:hover{
+
+    background:transparent !important;
+
+    border-radius:0 !important;
+
+    box-shadow:none !important;
+
+    padding:22px 30px !important;
+
+    margin:0 !important;
+
+    border-bottom:1px solid #ececec !important;
+
+}
+
+nav.main-links a:last-child{
+    border-bottom:none !important;
+}
+
+nav.main-links a::before,
+nav.main-links a::after{
+    border-radius:0 !important;
+}
+
+nav.main-links a::before{
+    display:none !important;
+}
+
+nav.main-links a::after{
+
+    content:"›";
+
+    display:block !important;
+
+    color:#d89c26;
+
+    font-size:22px;
+
+    margin-left:auto;
+
+}
   /* Main container */
   .container {
     width: 100%;
@@ -786,11 +945,9 @@ footer .desc,
     gap: 3px;
   }
 
-  .header-cta .btn-primary {
-    padding: 8px 9px;
-    font-size: 10px;
-  }
-
+ .header-cta .btn-primary{
+    display:none;
+}
   .menu-toggle span {
     width: 22px;
   }
@@ -815,6 +972,7 @@ footer .desc,
 
   .hero-stats {
     gap: 12px;
+	text-align:center;
   }
 
   .hero-stats div {
@@ -904,6 +1062,7 @@ footer .desc,
 }
 </style>
 </head>
+
 <body>
 
 <header id="siteHeader">
@@ -962,9 +1121,38 @@ footer .desc,
 
 <div class="strip">
   <div class="strip-track">
-    <span>Vedic Vastu</span><span>Energy Correction</span><span>Name Numerology</span><span>Mobile Numerology</span><span>Yantra &amp; Mantra</span><span>Crystal Healing</span><span>Rudraksha Guidance</span><span>Marriage Compatibility</span><span>Brand Logo Numerology</span><span>Visiting Card Design</span>
-    <span>Vedic Vastu</span><span>Energy Correction</span><span>Name Numerology</span><span>Mobile Numerology</span><span>Yantra &amp; Mantra</span><span>Crystal Healing</span><span>Rudraksha Guidance</span><span>Marriage Compatibility</span><span>Brand Logo Numerology</span><span>Visiting Card Design</span>
-  </div>
+   <span>Vedic Vastu</span>
+    <span>Energy Vastu</span>
+    <span>Name Correction</span>
+    <span>Mobile Correction</span>
+    <span>Yantra &amp; Mantra</span>
+    <span>Crystals</span>
+    <span>Rudraksha</span>
+    <span>Kundli Solutions</span>
+    <span>Marriage Compatibility</span>
+    <span>Career Guidance</span>
+    <span>Brand Logo Design</span>
+    <span>Visiting Card Design</span>
+    <span>LOSHU / VEDIC GRID</span>
+    <span>Original Crystals &amp; Rudraksha</span>
+
+    <!-- Duplicate for Infinite Scroll -->
+
+    <span>Vedic Vastu</span>
+    <span>Energy Vastu</span>
+    <span>Name Correction</span>
+    <span>Mobile Correction</span>
+    <span>Yantra &amp; Mantra</span>
+    <span>Crystals</span>
+    <span>Rudraksha</span>
+    <span>Kundli Solutions</span>
+    <span>Marriage Compatibility</span>
+    <span>Career Guidance</span>
+    <span>Brand Logo Design</span>
+    <span>Visiting Card Design</span>
+    <span>LOSHU / VEDIC GRID</span>
+    <span>Original Crystals &amp; Rudraksha</span>
+     </div>
 </div>
 
 <section class="about" id="about">
@@ -1008,66 +1196,248 @@ footer .desc,
       <p class="section-sub">Ten specialized offerings drawing on Vastu, numerology, and energy science — each tailored to your unique chart and space.</p>
     </div>
     <div class="svc-grid">
+<div class="svc-card reveal">
+    <span class="svc-num">01</span>
 
-      <div class="svc-card reveal"><span class="svc-num">01</span>
-        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg></div>
-        <h3>Vedic Vastu</h3>
-        <p>Transform your home, office, or commercial space using authentic Vedic Vastu principles to enhance health, wealth, relationships, and career growth — without unnecessary demolition.</p>
-      </div>
+    <div class="svc-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M3 11L12 4L21 11"/>
+            <path d="M5 10V20H19V10"/>
+            <path d="M9 20V14H15V20"/>
+        </svg>
+    </div>
 
-      <div class="svc-card reveal"><span class="svc-num">02</span>
-        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg></div>
-        <h3>Energy Vastu</h3>
-        <p>Identify and balance the subtle energies of your space with advanced correction techniques that remove negative vibrations and restore harmony.</p>
-      </div>
+    <h3>Vedic Vastu – Residential / Commercial</h3>
 
-      <div class="svc-card reveal"><span class="svc-num">03</span>
-        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M4 12h10M4 18h16"/><circle cx="18" cy="12" r="2"/></svg></div>
-        <h3>Name Numerology</h3>
-        <p>Your name carries a unique vibration. Receive a scientifically calculated Chaldean name correction aligned with your date of birth for career, finance, and growth.</p>
-      </div>
+    <p>
+        Create balanced homes and workplaces with authentic Vedic Vastu principles.
+        Get solutions for better health, harmony, relationships, and business growth.
+    </p>
 
-      <div class="svc-card reveal"><span class="svc-num">04</span>
-        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
-        <h3>Mobile Numerology</h3>
-        <p>Your mobile number influences the energy you attract daily. Get a personalized analysis and recommendations for better opportunities and prosperity.</p>
-      </div>
+<a href="#contact" class="svc-link">
+    Book Consultation
+    <span>→</span>
+</a>
+</div>
 
-      <div class="svc-card reveal"><span class="svc-num">05</span>
-        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5z"/></svg></div>
-        <h3>Yantra &amp; Mantra</h3>
-        <p>Receive energized Yantras and personalized Mantras to attract abundance, protection, peace, and spiritual growth while balancing planetary energies.</p>
-      </div>
+<div class="svc-card reveal">
+    <span class="svc-num">02</span>
+    <div class="svc-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M13 2L4 14H11L10 22L20 10H13L14 2Z"/>
+        </svg>
+    </div>
+    <h3>Energy Vastu Alignment</h3>
+    <p>Balance your space's energy without major structural changes. Remove negativity and attract peace, prosperity, and success.</p>
+	<a href="#contact" class="svc-link">
+    Book Consultation
+    <span>→</span>
+</a>
+</div>
 
-      <div class="svc-card reveal"><span class="svc-num">06</span>
-        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l6 5-2 9-4 6-4-6-2-9z"/></svg></div>
-        <h3>Crystals</h3>
-        <p>Discover carefully selected, energized crystals matched to your personal energy and intentions — for healing, confidence, abundance, or emotional balance.</p>
-      </div>
+<div class="svc-card reveal">
+    <span class="svc-num">03</span>
+    <div class="svc-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M4 6H20"/>
+            <path d="M4 12H16"/>
+            <path d="M4 18H20"/>
+            <circle cx="18" cy="12" r="2"/>
+        </svg>
+    </div>
+    <h3>Name Correction</h3>
+    <p>Align your name with Numerology to support personal growth, confidence, career, and life goals through positive vibrations.</p>
+	<a href="#contact" class="svc-link">
+    Book Consultation
+    <span>→</span>
+</a>
+</div>
 
-      <div class="svc-card reveal"><span class="svc-num">07</span>
-        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="5" r="2.4"/><circle cx="6" cy="12" r="2.4"/><circle cx="18" cy="12" r="2.4"/><circle cx="9" cy="19" r="2.4"/><circle cx="15" cy="19" r="2.4"/></svg></div>
-        <h3>Rudraksha</h3>
-        <p>Expert guidance in selecting authentic Rudraksha beads according to your birth chart and life challenges, energized for spiritual growth and protection.</p>
-      </div>
+<div class="svc-card reveal">
+    <span class="svc-num">04</span>
+    <div class="svc-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <rect x="7" y="2" width="10" height="20" rx="2"/>
+            <path d="M11 18H13"/>
+        </svg>
+    </div>
+    <h3>Mobile Number Correction</h3>
+    <p>Get a numerologically aligned mobile number to enhance communication, confidence, opportunities, and overall progress.</p>
+<a href="#contact" class="svc-link">
+    Book Consultation
+    <span>→</span>
+</a>
+</div>
 
-      <div class="svc-card reveal"><span class="svc-num">08</span>
-        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 10-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg></div>
-        <h3>Marriage Compatibility</h3>
-        <p>Understand compatibility beyond traditional matching through in-depth numerology and energy analysis — for lasting relationship harmony.</p>
-      </div>
+<div class="svc-card reveal">
+    <span class="svc-num">05</span>
+    <div class="svc-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M12 3L14.5 9.5L21 12L14.5 14.5L12 21L9.5 14.5L3 12L9.5 9.5Z"/>
+        </svg>
+    </div>
+    <h3>Yantra &amp; Mantra – For All Problems</h3>
+    <p>Receive personalized Yantra and Mantra remedies designed to support positivity, protection, and inner balance.</p>
+	<a href="#contact" class="svc-link">
+    Book Consultation
+    <span>→</span>
+</a>
+</div>
 
-      <div class="svc-card reveal"><span class="svc-num">09</span>
-        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20L18 6"/><path d="M14 4l6 6"/><circle cx="6" cy="18" r="2"/></svg></div>
-        <h3>Scientific Brand Logo</h3>
-        <p>Build a powerful brand identity designed with numerology, sacred geometry, and color psychology — resonating with success and trust.</p>
-      </div>
+<div class="svc-card reveal">
+    <span class="svc-num">06</span>
+    <div class="svc-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M12 2L18 7L16 16L12 22L8 16L6 7Z"/>
+        </svg>
+    </div>
+    <h3>Crystals – As Per Problems</h3>
+    <p>Get genuine crystal recommendations based on your personal needs to support career, relationships, health, and emotional well-being.</p>
+	<a href="#contact" class="svc-link">
+    Book Consultation
+    <span>→</span>
+</a>
+</div>
 
-      <div class="svc-card reveal"><span class="svc-num">10</span>
-        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h5M6 14h3"/></svg></div>
-        <h3>Scientific Visiting Card</h3>
-        <p>Every element — layout, colors, fonts, and proportions — thoughtfully aligned to support positive energy, credibility, and business success.</p>
-      </div>
+<div class="svc-card reveal">
+    <span class="svc-num">07</span>
+    <div class="svc-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="12" cy="5" r="2.4"/>
+            <circle cx="6" cy="12" r="2.4"/>
+            <circle cx="18" cy="12" r="2.4"/>
+            <circle cx="9" cy="19" r="2.4"/>
+            <circle cx="15" cy="19" r="2.4"/>
+        </svg>
+    </div>
+    <h3>Rudraksha Recommendation</h3>
+    <p>Find the right Rudraksha based on your birth details to enhance peace, confidence, focus, and spiritual growth.</p>
+	<a href="#contact" class="svc-link">
+    Book Consultation
+    <span>→</span>
+</a>
+</div>
+
+<div class="svc-card reveal">
+    <span class="svc-num">08</span>
+    <div class="svc-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <rect x="4" y="3" width="16" height="18" rx="2"/>
+            <path d="M8 8H16"/>
+            <path d="M8 12H16"/>
+            <path d="M8 16H13"/>
+        </svg>
+    </div>
+    <h3>Kundli Based Solutions</h3>
+    <p>Get personalized horoscope analysis with practical remedies for career, finance, relationships, education, and health.</p>
+	<a href="#contact" class="svc-link">
+    Book Consultation
+    <span>→</span>
+</a>
+</div>
+
+<div class="svc-card reveal">
+    <span class="svc-num">09</span>
+    <div class="svc-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M20.8 4.6A5.5 5.5 0 0013 4.6L12 5.6L11 4.6A5.5 5.5 0 103.2 12.4L4.2 13.4L12 21L19.8 13.4L20.8 12.4A5.5 5.5 0 0020.8 4.6Z"/>
+        </svg>
+    </div>
+    <h3>Marriage Compatibility</h3>
+    <p>Understand relationship compatibility through Vedic Astrology and Numerology for better harmony and long-term understanding.</p>
+	<a href="#contact" class="svc-link">
+    Book Consultation
+    <span>→</span>
+</a>
+</div>
+
+<div class="svc-card reveal">
+    <span class="svc-num">10</span>
+    <div class="svc-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M12 2V22"/>
+            <path d="M5 7H19"/>
+            <path d="M5 17H19"/>
+        </svg>
+    </div>
+    <h3>Profession Related Guidance</h3>
+    <p>Receive personalized career and business guidance based on your birth details to identify the right opportunities.</p>
+	<a href="#contact" class="svc-link">
+    Book Consultation
+    <span>→</span>
+</a>
+</div>
+
+<div class="svc-card reveal">
+    <span class="svc-num">11</span>
+    <div class="svc-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M4 20L18 6"/>
+            <path d="M14 4L20 10"/>
+            <circle cx="6" cy="18" r="2"/>
+        </svg>
+    </div>
+    <h3>Scientific Brand Logo Designing</h3>
+    <p>Design a unique brand logo aligned with Numerology and branding principles to reflect positive business energy.</p>
+	<a href="#contact" class="svc-link">
+    Book Consultation
+    <span>→</span>
+</a>
+</div>
+
+<div class="svc-card reveal">
+    <span class="svc-num">12</span>
+    <div class="svc-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <rect x="2" y="6" width="20" height="12" rx="2"/>
+            <path d="M6 10H12"/>
+            <path d="M6 14H9"/>
+        </svg>
+    </div>
+    <h3>Scientific Visiting Card Designing</h3>
+    <p>Create a professional visiting card designed with Numerology and branding principles for a lasting impression.</p>
+	<a href="#contact" class="svc-link">
+    Book Consultation
+    <span>→</span>
+</a>
+</div>
+
+<div class="svc-card reveal">
+    <span class="svc-num">13</span>
+    <div class="svc-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M12 3V21"/>
+            <path d="M3 12H21"/>
+            <path d="M6 6L18 18"/>
+            <path d="M18 6L6 18"/>
+        </svg>
+    </div>
+    <h3>LOSHU GRID / VEDIC GRID Based Predictions &amp; Solutions</h3>
+    <p>Discover your strengths, challenges, and life patterns with personalized predictions and practical remedies.</p>
+	<a href="#contact" class="svc-link">
+    Book Consultation
+    <span>→</span>
+</a>
+</div>
+
+<div class="svc-card reveal">
+    <span class="svc-num">14</span>
+    <div class="svc-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="8" cy="8" r="3"/>
+            <circle cx="16" cy="8" r="3"/>
+            <path d="M8 11V20"/>
+            <path d="M16 11V20"/>
+            <path d="M8 20H16"/>
+        </svg>
+    </div>
+    <h3>Original Crystals &amp; Rudraksha Available</h3>
+    <p>We provide authentic Crystals and certified Rudraksha with expert guidance to suit your individual needs.</p>
+	<a href="#contact" class="svc-link">
+    Book Consultation
+    <span>→</span>
+</a>
+</div>
 
     </div>
   </div>
@@ -1193,16 +1563,20 @@ footer .desc,
           <label>Service Interested In</label>
           <select required>
             <option value="">Select a service</option>
-            <option>Vedic Vastu</option>
-            <option>Energy Vastu</option>
-            <option>Name Numerology</option>
-            <option>Mobile Numerology</option>
-            <option>Yantra &amp; Mantra</option>
-            <option>Crystals</option>
-            <option>Rudraksha</option>
-            <option>Marriage Compatibility</option>
-            <option>Scientific Brand Logo</option>
-            <option>Scientific Visiting Card</option>
+          <option>Vedic Vastu – Residential / Commercial</option>
+<option>Energy Vastu Alignment</option>
+<option>Name Correction</option>
+<option>Mobile Number Correction</option>
+<option>Yantra &amp; Mantra – For All Problems</option>
+<option>Crystals – As Per Problems</option>
+<option>Rudraksha Recommendation</option>
+<option>Kundli Based Solutions</option>
+<option>Marriage Compatibility</option>
+<option>Profession Related Guidance</option>
+<option>Scientific Brand Logo Designing</option>
+<option>Scientific Visiting Card Designing</option>
+<option>LOSHU / VEDIC GRID Based Predictions</option>
+<option>Original Crystals & Rudraksha Available</option>
           </select>
         </div>
       </div>
@@ -1221,10 +1595,12 @@ footer .desc,
   <div class="container">
     <div class="foot-grid">
       <div>
-        <div class="foot-brand"><img src="logo.png" alt="SriDivya Bhadwal logo"><b>SriDivya Bhadwal</b></div>
+        <div class="foot-brand">
+		
+		<img src="logo.png" alt="SriDivya Bhadwal logo"><b>SriDivya Bhadwal</b></div>
         <p class="desc">Vastu Expert &amp; Numerologist offering guidance, clarity, and transformation through authentic Vedic wisdom.</p>
         <div class="foot-social">
-          <a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+          <a href="https://www.instagram.com/sridivyabhadwal?utm_source=qr" aria-label="Instagram" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
           <a href="#" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
           <a href="#" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none"/></svg></a>
         </div>
@@ -1268,35 +1644,144 @@ footer .desc,
 </button>
 
 <script>
+/* ===========================
+   Current Year
+=========================== */
 document.getElementById('year').textContent = new Date().getFullYear();
 
+
+/* ===========================
+   Header Scroll Effect
+=========================== */
 const header = document.getElementById('siteHeader');
+const scrollTopBtn = document.getElementById('scrollTop');
+
 window.addEventListener('scroll', () => {
-  header.classList.toggle('scrolled', window.scrollY > 20);
-  document.getElementById('scrollTop').classList.toggle('show', window.scrollY > 500);
+
+    header.classList.toggle('scrolled', window.scrollY > 20);
+
+    scrollTopBtn.classList.toggle('show', window.scrollY > 500);
+
 });
 
+
+/* ===========================
+   Mobile Navigation
+=========================== */
 const menuToggle = document.getElementById('menuToggle');
 const mainNav = document.getElementById('mainNav');
-menuToggle.addEventListener('click', () => mainNav.classList.toggle('open'));
-document.querySelectorAll('#mainNav a').forEach(a => a.addEventListener('click', () => mainNav.classList.remove('open')));
 
-document.getElementById('scrollTop').addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+menuToggle.addEventListener('click', () => {
+
+    mainNav.classList.toggle('open');
+    menuToggle.classList.toggle('active');
+
+});
+
+
+/* Close menu when link clicked */
+
+document.querySelectorAll('#mainNav a').forEach(link => {
+
+    link.addEventListener('click', () => {
+
+        mainNav.classList.remove('open');
+        menuToggle.classList.remove('active');
+
+    });
+
+});
+
+
+/* Close menu when clicking outside */
+
+document.addEventListener('click', function(e){
+
+    if(
+        mainNav.classList.contains('open') &&
+        !mainNav.contains(e.target) &&
+        !menuToggle.contains(e.target)
+    ){
+
+        mainNav.classList.remove('open');
+        menuToggle.classList.remove('active');
+
+    }
+
+});
+
+
+/* ===========================
+   Scroll To Top
+=========================== */
+
+scrollTopBtn.addEventListener('click', () => {
+
+    window.scrollTo({
+
+        top:0,
+        behavior:'smooth'
+
+    });
+
+});
+
+
+/* ===========================
+   Reveal Animation
+=========================== */
 
 const revealEls = document.querySelectorAll('.reveal');
-const io = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-}, { threshold: 0.15 });
-revealEls.forEach(el => io.observe(el));
+
+const io = new IntersectionObserver((entries)=>{
+
+    entries.forEach(entry=>{
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add('in');
+            io.unobserve(entry.target);
+
+        }
+
+    });
+
+},{threshold:0.15});
+
+revealEls.forEach(el=>io.observe(el));
+
+
+/* ===========================
+   Contact Form
+=========================== */
 
 function handleFormSubmit(e){
-  e.preventDefault();
-  const btn = e.target.querySelector('button');
-  const original = btn.innerHTML;
-  btn.innerHTML = 'Message Sent ✓';
-  e.target.reset();
-  setTimeout(() => { btn.innerHTML = original; }, 2800);
+
+    e.preventDefault();
+
+    const btn=e.target.querySelector('button');
+
+    const original=btn.innerHTML;
+
+    btn.innerHTML='Message Sent ✓';
+
+    e.target.reset();
+
+    setTimeout(()=>{
+
+        btn.innerHTML=original;
+
+    },2800);
+
 }
+
 </script>
+<a href="https://wa.me/918375069291"
+   class="whatsapp-float"
+   target="_blank">
+
+<i class="fa-brands fa-whatsapp"></i>
+
+</a>
 </body>
 </html>
